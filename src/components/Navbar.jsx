@@ -1,4 +1,4 @@
-import { MoreVertical } from 'lucide-react';
+import { KanbanSquare, MoreVertical } from 'lucide-react';
 import React from "react";
 
 const Navbar = () => {
@@ -6,8 +6,10 @@ const Navbar = () => {
         <div className='flex items-center justify-between px-10 py-4 text-2xl'>
            
                 <div className='flex items-center justify-between  '>
-                    <div className='w-48'>
-                        <h1>Kanban</h1>
+                    <div className='flex items-center justify-center gap-10 w-5 sm:w-48 mx-4'>
+                    <KanbanSquare color="#b05ead" />
+                        <h1 className='hidden sm:flex'>Kanban</h1>
+                      
                     </div>
                 <div className='items-start justify-start'>
                     <h1>Name</h1>
