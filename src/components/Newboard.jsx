@@ -1,8 +1,12 @@
 import { X } from "lucide-react"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { addBoard } from "../features/newboardSlice"
 
 const Newboard = ()=>{
+    const dispatch = useDispatch()
+    dispatch(addBoard('sdkssf'))
    const navigate = useNavigate()
     const [columns,setColumns] = useState(['column','column'])
     return(
