@@ -1,8 +1,9 @@
 import { X } from "lucide-react"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Newboard = ()=>{
-   
+   const navigate = useNavigate()
     const [columns,setColumns] = useState(['column','column'])
     return(
         <div className="flex flex-col  items-center justify-center h-[100vh] bg-[#B4B4B8]">
@@ -20,7 +21,11 @@ const Newboard = ()=>{
                             <div className="flex gap-2">
 
                                 <input type="text" className="border-2 border-black"/>
-                                <X color="#e63737" className="cursor-pointer" onClick={()=>{columns.shift(), setColumns(columns)}}/>
+                                <X color="#e63737" className="cursor-pointer" onClick={()=>{
+                                    
+                                    setColumns(columns.slice(0,columns.length-1))
+                                    
+                                    }}/>
                             </div>
                            
                         )
@@ -30,7 +35,7 @@ const Newboard = ()=>{
             <div className="flex flex-col gap-4 my-2 sm:my-4">
 
             <button className="bg-[#65647C] py-1 rounded-lg text-[#F2EFE5]" onClick={()=>{setColumns([...columns,'columns'])}}>Add columns</button>
-            <button className="bg-[#65647C] py-1 rounded-lg text-[#F2EFE5]">Create new board</button>
+            <button className="bg-[#65647C] py-1 rounded-lg text-[#F2EFE5]" onClick={()=>{navigate('/')}}>Create new board</button>
             </div>
            </div>
         </div>
