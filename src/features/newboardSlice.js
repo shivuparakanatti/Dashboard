@@ -1,9 +1,10 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 const initialState = {
     boards :[{
-        id :1,
-        name : 'add',
-        columns:['todo','completed']
+      
+        boardName: "Developers",
+        columns:[ 'in progress', 'completed', 'todo'],
+        id: "20000"
     }]
 }
 
