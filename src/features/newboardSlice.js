@@ -1,6 +1,10 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 const initialState = {
-    boards :[]
+    boards :[{
+        id :1,
+        name : 'add',
+        columns:['todo','completed']
+    }]
 }
 
 export const boardSlice = createSlice({
