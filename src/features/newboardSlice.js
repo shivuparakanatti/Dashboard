@@ -14,7 +14,8 @@ export const boardSlice = createSlice({
         addBoard :(state,action)=>{
             const todo= {
                 id : nanoid(),
-                boardName : action.payload
+                boardName : action.payload.name,
+                columns : action.payload.columns
             }
             state.boards.push(todo)
         }

@@ -26,7 +26,7 @@ const Newboard = ()=>{
 
     const handleCreateNewBoard=()=>{
         navigate('/');
-        dispatch(addBoard({boardName,tasks}))
+        dispatch(addBoard({name:boardName,columns:tasks}))
         
 
     }
