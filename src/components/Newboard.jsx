@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { addBoard } from "../features/newboardSlice"
+import { currentBoard } from "../features/currentBoardSlice"
 
 const Newboard = ()=>{
     const [boardName,setBoardName]= useState()
@@ -12,10 +13,12 @@ const Newboard = ()=>{
    const navigate = useNavigate()
     const [columns,setColumns] = useState(['column','column'])
 
+    
+
 
     const handleInputChange = (event, index) => {
         const value = event.target.value;
-    
+       
         // Update the array, creating a new array with the updated value at the specified index
         setTasks((prevData) => {
           const newData = [...prevData];

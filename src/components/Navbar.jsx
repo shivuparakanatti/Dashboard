@@ -1,7 +1,11 @@
 import { KanbanSquare, MoreVertical } from 'lucide-react';
 import React from "react";
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+    const currentBoard = useSelector(state=>{
+        return state.currentBoardReducer.currentBoardName
+    })
     return (
         <div className='flex items-center justify-between px-10 py-4 text-3xl'>
 
@@ -15,7 +19,7 @@ const Navbar = () => {
             </div>
 
             <div className='items-start justify-start'>
-                    <h1>Name</h1>
+                    <h1>{currentBoard}</h1>
                 </div>
             <div className='flex items-center justify-center gap-4 '>
                 <button className='bg-blue-400 px-2 py-1 rounded-lg'>Add new Task</button>
