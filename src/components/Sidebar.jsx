@@ -1,11 +1,12 @@
 import { KanbanSquare, PlusSquare } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { currentBoard } from "../features/currentBoardSlice"
 
 const Sidebar = ()=>{
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const allBoards = useSelector(state=>{
         return state.boardReducer.boards
@@ -18,6 +19,7 @@ const Sidebar = ()=>{
     const handleBoard=(board)=>{
       
         dispatch(currentBoard(board.boardName))
+       
     }
 
     
@@ -31,7 +33,7 @@ const Sidebar = ()=>{
                 allBoards && allBoards.map((ele,i)=>{
                     return(
                         <div key={i}>
-                        <div className={`flex items-center justify-center ${currentName==ele.boardName ? 'bg-red-200': ''}`}>
+                        <div className={`flex items-center justify-center ${currentName==ele.boardName ? 'bg-[#6962AD] text-white rounded-md px-1 py-1': ''} `}>
                         <KanbanSquare size={16} color="#0e0101" />
                         <h1 className="text-2xl mx-1" onClick={(e)=>{handleBoard(ele)}}>{ele.boardName}</h1>
                         </div>

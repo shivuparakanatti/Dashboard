@@ -10,7 +10,7 @@ const Home = ()=>{
             <div className="flex flex-col">
 
             <Sidebar/>
-            <Boards/>
+           <Boards/>
             </div>
         </div>
     )
