@@ -13,10 +13,10 @@ const Boards=()=>{
      })
     console.log(boardDetails)
     return (
-    <div className="bg-[#D4E7C5] h-screen ml-56 flex gap-1 ">
+    <div className="bg-[#E1F0DA] h-screen ml-56 flex gap-1 ">
         {
              boardDetails && boardDetails[0].columns.map(ele=>{
-                return <h1 className="w-1/4  bg-[#E1F0DA] mx-2 my-2">{ele}</h1>
+                return <h1 className="w-1/4  mx-2 my-2">{ele}</h1>
              })
         }
         <div className="w-1/4 flex items-center justify-center ">
