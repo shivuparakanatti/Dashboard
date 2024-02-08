@@ -30,7 +30,7 @@ const Addnewtask = ()=>{
       }
 
       const handleCreate=(e)=>{
-        e.preventDefault()
+        e.preventDefault();
         console.log(taskDetails)
       }
    
