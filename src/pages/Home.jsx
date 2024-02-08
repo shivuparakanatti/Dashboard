@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux"
 import Boards from "../components/Board"
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
 
 const Home = ()=>{
+
+    
     return (
         <div>
 

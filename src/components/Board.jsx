@@ -11,7 +11,15 @@ const Boards=()=>{
      const boardDetails = allBoards.filter(ele=>{
          return ele.boardName == boardName
      })
-    console.log(boardDetails)
+    
+     const tasks = useSelector(state=>{
+        return state.tasksSlice.allTasks
+    })
+    const currentBoardTasks = tasks.filter(ele=>{
+        return ele.board == boardName
+    })
+
+    console.log(currentBoardTasks)
     return (
     <div className="bg-[#E1F0DA] h-screen ml-56 flex gap-1 ">
         {

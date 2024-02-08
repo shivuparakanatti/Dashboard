@@ -14,16 +14,14 @@ const tasksSlice=createSlice({
     initialState,
     reducers : {
         addNewTask : (state,action)=>{
-            const currentBoard = useSelector(state=>{
-                return state.currentBoardReducer.currentBoardName
-            })
+          
             const task = {
-                currentBoard :{
-
+                
+                    board : action.payload.boardname,
                     taskName : action.payload.taskName,
                     taskDisc : action.payload.taskDisc,
                     taskStatus : action.payload.taskStatus
-                }
+                
             }
             state.allTasks.push(task)
 
