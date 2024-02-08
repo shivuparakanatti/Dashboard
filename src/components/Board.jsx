@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import ReactTable from "react-table";  
 
 const Boards=()=>{
     const boardName = useSelector((state)=>{
@@ -19,18 +20,62 @@ const Boards=()=>{
         return ele.board == boardName
     })
 
+   const columns= boardDetails[0].columns.map(ele=>{
+    return ele
+   })
+
+   const data = currentBoardTasks.map(ele=>{
+    return ele.taskStatus
+   })
+
     console.log(currentBoardTasks)
-    return (
-    <div className="bg-[#E1F0DA] h-screen ml-56 flex gap-1 ">
-        {
-             boardDetails && boardDetails[0].columns.map(ele=>{
-                return <h1 className="w-1/4  mx-2 my-2">{ele}</h1>
-             })
+
+
+    const tasksByStatus = {};
+    currentBoardTasks.forEach((row) => {
+        const { taskStatus } = row;
+        if (!tasksByStatus[taskStatus]) {
+          tasksByStatus[taskStatus] = [];
         }
-        <div className="w-1/4 flex items-center justify-center ">
-            <h1 className="bg-[#756AB6] text-2xl px-1 py-2 rounded-md">Add New Task</h1>
-            </div>
+        tasksByStatus[taskStatus].push(row);
+      });
+    return (
+<div className="bg-[#E1F0DA] h-screen ml-56">
+ <table className=" ">
+      <thead>
+        <tr>
+          {columns.map((column, index) => (
+            <th key={index}>{column}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {/* Determine the maximum number of rows needed for any status */}
+        {Array.from(
+          { length: Math.max(...Object.values(tasksByStatus).map((arr) => arr.length)) },
+          (_, rowIndex) => (
+            <tr key={rowIndex}>
+              {columns.map((column, columnIndex) => (
+                <td key={columnIndex}>
+                  {/* Display task details for the current status and column */}
+                  {tasksByStatus[column] &&
+                    tasksByStatus[column][rowIndex] && (
+                      <div>
+                        <p>Board: {tasksByStatus[column][rowIndex].board}</p>
+                        <p>Task Name: {tasksByStatus[column][rowIndex].taskName}</p>
+                        <p>Task Description: {tasksByStatus[column][rowIndex].taskDisc}</p>
+                      </div>
+                    )}
+                </td>
+              ))}
+            </tr>
+          )
+        )}
+      </tbody>
+    </table>
     </div>
+        
+  
     )
 }
 
