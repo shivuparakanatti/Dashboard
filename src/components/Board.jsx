@@ -1,7 +1,10 @@
+import { MoreVertical } from "lucide-react";
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom";
 import ReactTable from "react-table";  
 
 const Boards=()=>{
+  const navigate = useNavigate()
     const boardName = useSelector((state)=>{
         return state.currentBoardReducer.currentBoardName
     })
@@ -28,7 +31,7 @@ const Boards=()=>{
     return ele.taskStatus
    })
 
-    console.log(currentBoardTasks)
+    console.log(boardName)
 
 
     const tasksByStatus = {};
@@ -39,13 +42,19 @@ const Boards=()=>{
         }
         tasksByStatus[taskStatus].push(row);
       });
+
+      const handleEdit=(e)=>{
+        console.log(e)
+        navigate(`/${boardName}/addnewtask/${e}`)
+      }
+     
     return (
 <div className="bg-[#E1F0DA] h-screen ml-56">
  <table className=" ">
       <thead>
-        <tr>
+        <tr  className="">
           {columns.map((column, index) => (
-            <th key={index}>{column}</th>
+            <th key={index} className="mx-18">{column}</th>
           ))}
         </tr>
       </thead>
@@ -54,16 +63,23 @@ const Boards=()=>{
         {Array.from(
           { length: Math.max(...Object.values(tasksByStatus).map((arr) => arr.length)) },
           (_, rowIndex) => (
-            <tr key={rowIndex}>
+            <tr key={rowIndex} className="">
               {columns.map((column, columnIndex) => (
-                <td key={columnIndex}>
+               
+                <td key={columnIndex} className="mx-20">
                   {/* Display task details for the current status and column */}
                   {tasksByStatus[column] &&
                     tasksByStatus[column][rowIndex] && (
-                      <div>
-                        <p>Board: {tasksByStatus[column][rowIndex].board}</p>
-                        <p>Task Name: {tasksByStatus[column][rowIndex].taskName}</p>
-                        <p>Task Description: {tasksByStatus[column][rowIndex].taskDisc}</p>
+                    
+                      <div className={`mx-4 flex flex-col  relative items-center justify-center w-48 my-4 ${columnIndex%2 == 0 ? 'bg-[#B19470]' : 'bg-[#C6A969]' }  px-2 py-4`}>
+                        <div className="group ">
+
+                        <MoreVertical color="#fafafa" className="absolute  top-1 right-0 cursor-pointer" onClick={()=>{handleEdit(tasksByStatus[column][rowIndex].taskName)}}/>
+                        <span className="absolute -top-6 right-0 scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white z-10 group-hover:scale-100" >Edit</span>
+                        </div>
+                        
+                        <p className="text-xl ">{tasksByStatus[column][rowIndex].taskName}</p>
+                        <p> {tasksByStatus[column][rowIndex].taskDisc}</p>
                       </div>
                     )}
                 </td>
