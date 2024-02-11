@@ -49,12 +49,12 @@ const Boards=()=>{
       }
      
     return (
-<div className="bg-[#E1F0DA] h-screen ml-56">
+<div className="bg-[#E1F0DA] h-screen ml-0 sm:ml-56">
  <table className=" ">
       <thead>
         <tr  className="">
           {columns.map((column, index) => (
-            <th key={index} className="mx-18">{column}</th>
+            <th key={index} className="w-48 md:w-60 text-2xl ">{column}</th>
           ))}
         </tr>
       </thead>
@@ -66,7 +66,7 @@ const Boards=()=>{
             <tr key={rowIndex} className="">
               {columns.map((column, columnIndex) => (
                
-                <td key={columnIndex} className="mx-20">
+                <td key={columnIndex} className="w-24 md:w-60">
                   {/* Display task details for the current status and column */}
                   {tasksByStatus[column] &&
                     tasksByStatus[column][rowIndex] && (
@@ -79,7 +79,7 @@ const Boards=()=>{
                         </div>
                         
                         <p className="text-xl ">{tasksByStatus[column][rowIndex].taskName}</p>
-                        <p> {tasksByStatus[column][rowIndex].taskDisc}</p>
+                        <p className="text-sm"> {tasksByStatus[column][rowIndex].taskDisc}</p>
                       </div>
                     )}
                 </td>

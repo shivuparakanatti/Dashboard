@@ -19,6 +19,7 @@ function App() {
   <Route path='/' Component={Home}/>
   <Route path='/newboard' Component={Newboard}/>
   <Route path='/:boardname/addnewtask' Component={Addnewtask}/>
+  <Route path='/:boardname/addnewtask/:task' Component={Addnewtask}/>
   
 </Routes>
     </div>
