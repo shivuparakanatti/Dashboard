@@ -31,7 +31,7 @@ const Boards=()=>{
     return ele.taskStatus
    })
 
-    console.log(boardName)
+   
 
 
     const tasksByStatus = {};
