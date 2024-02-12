@@ -35,8 +35,16 @@ const tasksSlice=createSlice({
             
           }
         
+    },
+    deleteTask : (state,action)=>{
+        const indexToDelete = state.allTasks.findIndex(obj => obj.taskName === action.payload.taskName);
+        const filteredTasks = state.allTasks.filter((ele,i)=>{
+            return i!= indexToDelete
+        })
+        state.allTasks = filteredTasks
+        
     }
 }
 })
-export const {addNewTask,updateTask} = tasksSlice.actions
+export const {addNewTask,updateTask,deleteTask} = tasksSlice.actions
 export default tasksSlice.reducer

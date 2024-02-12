@@ -1,10 +1,13 @@
-import { MoreVertical } from "lucide-react";
+import { MoreVertical, Trash2 } from "lucide-react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
+import { deleteTask } from "../features/tasksSlice";
  
 
 const Boards=()=>{
   const navigate = useNavigate()
+  const dispatch = useDispatch()
     const boardName = useSelector((state)=>{
         return state.currentBoardReducer.currentBoardName
     })
@@ -44,9 +47,14 @@ const Boards=()=>{
       });
 
       const handleEdit=(e)=>{
-        console.log(e)
+        
         navigate(`/${boardName}/addnewtask/${e}`)
       }
+      const handleDelete=(e)=>{
+        dispatch(deleteTask({taskName : e}))
+        console.log({taskName : e})
+      }
+
      
     return (
 <div className="bg-[#E1F0DA] h-screen ml-0 sm:ml-56">
@@ -76,6 +84,10 @@ const Boards=()=>{
 
                         <MoreVertical color="#fafafa" className="absolute  top-1 right-0 cursor-pointer" onClick={()=>{handleEdit(tasksByStatus[column][rowIndex].taskName)}}/>
                         <span className="absolute -top-6 right-0 scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white z-10 group-hover:scale-100" >Edit</span>
+                        </div>
+                        <div className="group">
+                        <Trash2 color="#f00a0a" size={18}  className="absolute  bottom-1 right-1 cursor-pointer" onClick={()=>{handleDelete(tasksByStatus[column][rowIndex].taskName)}}/>
+                        <span className="absolute -bottom-6 right-0 scale-0 transition-all rounded bg-gray-800 p-1 text-xs text-white z-10 group-hover:scale-100" >Delete</span>
                         </div>
                         
                         <p className="text-xl ">{tasksByStatus[column][rowIndex].taskName}</p>
