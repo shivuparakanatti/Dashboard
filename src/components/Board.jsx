@@ -1,7 +1,7 @@
 import { MoreVertical } from "lucide-react";
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import ReactTable from "react-table";  
+ 
 
 const Boards=()=>{
   const navigate = useNavigate()
