@@ -41,7 +41,7 @@ const tasksSlice=createSlice({
         const filteredTasks = state.allTasks.filter((ele,i)=>{
             return i!= indexToDelete
         })
-        state.allTasks = filteredTasks
+        state.allTasks.splice(indexToDelete,1) 
         
     }
 }
