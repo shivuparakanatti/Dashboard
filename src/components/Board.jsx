@@ -26,7 +26,7 @@ const Boards=()=>{
         return ele.board == boardName
     })
 
-   const columns= boardDetails[0].columns.map(ele=>{
+   const columns= boardDetails[0] &&  boardDetails[0].columns.map(ele=>{
     return ele
    })
 
@@ -61,7 +61,7 @@ const Boards=()=>{
  <table className=" ">
       <thead>
         <tr  className="">
-          {columns.map((column, index) => (
+          {columns && columns.map((column, index) => (
             <th key={index} className="w-48 md:w-60 text-2xl ">{column}</th>
           ))}
         </tr>

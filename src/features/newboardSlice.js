@@ -19,9 +19,13 @@ export const boardSlice = createSlice({
                 columns : action.payload.columns
             }
             state.boards.push(todo)
+        },
+        removeBoard : (state,action)=>{
+            const index = state.boards.findIndex(ele=>ele.boardName == action.payload.boardName)
+            state.boards.splice(index,1)
         }
     }
 })
 
-export const {addBoard} = boardSlice.actions
+export const {addBoard,removeBoard} = boardSlice.actions
 export default boardSlice.reducer
