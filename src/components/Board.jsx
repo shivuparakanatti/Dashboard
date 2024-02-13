@@ -52,7 +52,7 @@ const Boards=()=>{
       }
       const handleDelete=(e)=>{
         dispatch(deleteTask({taskName : e}))
-        console.log({taskName : e})
+        
       }
 
      

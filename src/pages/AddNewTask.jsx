@@ -48,11 +48,7 @@ const Addnewtask = () => {
         }
 
     },[])
-    console.log(status)
-
-    
-
-    console.log(task)
+   
 
     const options = currentBoardDetails[0].columns
 
@@ -65,7 +61,7 @@ const Addnewtask = () => {
 
     const handleCreate = (e) => {
 
-        //console.log(taskDetails)
+
     }
     const handleFormSubmit = (e) => {
         e.preventDefault();
