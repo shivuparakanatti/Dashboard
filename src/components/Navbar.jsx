@@ -1,10 +1,12 @@
 import { KanbanSquare, MoreVertical } from 'lucide-react';
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const navigate=useNavigate()
+
+    const [showMore, setShowMore] = useState(false)
     const currentBoard = useSelector(state=>{
         return state.currentBoardReducer.currentBoardName
     })
@@ -14,6 +16,10 @@ const Navbar = () => {
 
     const handleNewTask=()=>{
         navigate(`/${currentName}/addnewtask`)
+    }
+
+    const handleMore=()=>{
+        setShowMore(!showMore)
     }
     return (
         <div className='flex items-center justify-between px-10 py-4 text-3xl'>
@@ -32,7 +38,14 @@ const Navbar = () => {
                 </div>
             <div className='flex items-center justify-center gap-4 '>
                 <button className='bg-blue-400 px-2 py-1 rounded-lg' onClick={handleNewTask}>Add new Task</button>
-                <MoreVertical />
+                <div className='relative'>
+
+                <MoreVertical className='cursor-pointer' onClick={handleMore}/>
+                <div className={` ${showMore ? 'flex' : 'hidden'} absolute top-8 right-2 text-base w-36 bg-slate-50 flex flex-col items-start justify-start gap-2 py-2 px-2 rounded-md `}>
+                    <p className='cursor-pointer'>Edit Board</p>
+                    <p className='cursor-pointer text-red-500'>Delete Board</p>
+                </div>
+                </div>
             </div>
 
             
