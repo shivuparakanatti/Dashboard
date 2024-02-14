@@ -1,7 +1,7 @@
 import { X } from "lucide-react"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { addBoard } from "../features/newboardSlice"
 import { currentBoard } from "../features/currentBoardSlice"
 
@@ -9,6 +9,9 @@ const Newboard = ()=>{
     const [boardName,setBoardName]= useState()
     const [tasks,setTasks]= useState([])
     const dispatch = useDispatch()
+    const {currentBoard} = useParams()
+
+    console.log(currentBoard)
     
    const navigate = useNavigate()
     const [columns,setColumns] = useState(['column','column'])
