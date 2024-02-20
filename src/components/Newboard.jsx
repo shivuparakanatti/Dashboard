@@ -11,7 +11,7 @@ const Newboard = ()=>{
     const dispatch = useDispatch()
     const {currentBoard} = useParams()
 
-    console.log(currentBoard)
+   
     
    const navigate = useNavigate()
     const [columns,setColumns] = useState(['column','column'])
