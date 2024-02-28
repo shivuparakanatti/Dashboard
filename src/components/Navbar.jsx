@@ -1,16 +1,38 @@
-import { KanbanSquare, MoreVertical } from 'lucide-react';
+import { ArrowBigDown, ArrowDown, ArrowDown01, ArrowDownFromLine, ArrowDownIcon, KanbanSquare, MoreVertical } from 'lucide-react';
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { removeBoard } from '../features/newboardSlice';
-
+import {
+    DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu"
+import { Button } from './ui/button'
+import { currentBoard } from '@/features/currentBoardSlice';
+import { cn } from '@/lib/utils';
 const Navbar = () => {
-    const navigate=useNavigate()
+            
     const dispatch = useDispatch()
+    const navigate=useNavigate()
+
+    const [position, setPosition] = React.useState("bottom")
+
+    const allBoards = useSelector(state=>{
+        return state.boardReducer.boards
+    })
+const handleBoard=(board)=>{
+      dispatch(currentBoard(board.boardName))
+       
+    }
 
     const [showMore, setShowMore] = useState(false)
-    const currentBoard = useSelector(state=>{
+    const currentboardName = useSelector(state=>{
         return state.currentBoardReducer.currentBoardName
     })
     const currentName = useSelector(state=>{
@@ -26,14 +48,14 @@ const Navbar = () => {
     }
 
     const handleDeleteBoard=()=>{
-        dispatch(removeBoard({boardName : currentBoard}))
+        dispatch(removeBoard({boardName : currentboardName}))
         navigate('/')
     }
     const handleEditBoard=()=>{
         navigate(`/newboard/${currentName}`)
     }
     return (
-        <div className='flex items-center justify-between px-10 py-4 text-3xl'>
+        <div className='flex items-center justify-between px-2 md:px-10 py-4 text-3xl'>
 
             <div className='flex items-center justify-between  '>
                 <div className='flex items-center justify-center gap-10 '>
@@ -44,11 +66,44 @@ const Navbar = () => {
                
             </div>
 
-            <div className='items-start justify-start'>
-                    <h1>{currentBoard}</h1>
+            <div className='items-start justify-start hidden sm:flex'>
+                    <h1>{currentboardName}</h1>
+                    
+                </div>
+            <div className='items-start justify-start sm:hidden'>
+            <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">{currentboardName} <ArrowDown/></Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>All Boards</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+
+
+        {
+            allBoards.map(ele=>{
+                return (
+                    <>
+                    <DropdownMenuRadioItem value={ele.boardName} key={ele.boardName} onClick={(e)=>{handleBoard(ele)}}>{ele.boardName}</DropdownMenuRadioItem>
+         
+                    
+                    </>
+                )
+            })
+        }                   <Link to="/newboard">
+
+                            <DropdownMenuRadioItem value='New Board' className={cn('bg-slate-200 hover:bg-blue-500')}> Create New Board</DropdownMenuRadioItem>
+        </Link>
+
+          
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+                    
                 </div>
             <div className='flex items-center justify-center gap-4 '>
-                <button className='bg-blue-400 px-2 py-1 rounded-lg' onClick={handleNewTask}>Add new Task</button>
+                <Button className='bg-blue-400 hover:bg-blue-300 px-2 py-1 rounded-lg' variant="secondary" onClick={handleNewTask}>Add New Task</Button>
                 <div className='relative'>
 
                 <MoreVertical className='cursor-pointer' onClick={handleMore}/>
