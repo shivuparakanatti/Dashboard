@@ -103,7 +103,7 @@ const handleBoard=(board)=>{
                     
                 </div>
             <div className='flex items-center justify-center gap-4 '>
-                <Button className='bg-blue-400 hover:bg-blue-300 px-2 py-1 rounded-lg' variant="secondary" onClick={handleNewTask}>Add New Task</Button>
+                <Button variant="outline" className='bg-blue-400 hover:bg-blue-300 px-2 py-1 rounded-lg' variant="secondary" onClick={handleNewTask}>Add New Task</Button>
                 <div className='relative'>
 
                 <MoreVertical className='cursor-pointer' onClick={handleMore}/>
